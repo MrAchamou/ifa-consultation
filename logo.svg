@@ -1,0 +1,74 @@
+<svg width="160" height="160" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg-gradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#f7e98e"/>
+      <stop offset="100%" style="stop-color:#d4af37"/>
+    </radialGradient>
+    <linearGradient id="figure-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b4513"/>
+      <stop offset="100%" style="stop-color:#5d2f0a"/>
+    </linearGradient>
+    <linearGradient id="robe-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d5a87"/>
+      <stop offset="100%" style="stop-color:#1a365d"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="80" cy="80" r="75" fill="url(#bg-gradient)" stroke="#c9a96e" stroke-width="2"/>
+  
+  <!-- Decorative border -->
+  <circle cx="80" cy="80" r="70" fill="none" stroke="#8b4513" stroke-width="1" stroke-dasharray="3,2"/>
+  
+  <!-- African patterns around border -->
+  <g stroke="#8b4513" stroke-width="2" fill="none">
+    <path d="M 80,15 L 85,20 L 80,25 L 75,20 Z"/>
+    <path d="M 145,80 L 140,75 L 135,80 L 140,85 Z"/>
+    <path d="M 80,145 L 75,140 L 80,135 L 85,140 Z"/>
+    <path d="M 15,80 L 20,75 L 25,80 L 20,85 Z"/>
+  </g>
+  
+  <!-- Central figure - head -->
+  <ellipse cx="80" cy="60" rx="15" ry="18" fill="url(#figure-gradient)"/>
+  
+  <!-- Crown/headdress -->
+  <path d="M 65,50 Q 80,35 95,50 L 90,55 Q 80,45 70,55 Z" fill="url(#robe-gradient)"/>
+  
+  <!-- Eyes -->
+  <circle cx="75" cy="58" r="2" fill="#f7e98e"/>
+  <circle cx="85" cy="58" r="2" fill="#f7e98e"/>
+  
+  <!-- Nose -->
+  <path d="M 80,62 L 78,66 L 82,66 Z" fill="#5d2f0a"/>
+  
+  <!-- Body/robe -->
+  <path d="M 65,75 Q 80,70 95,75 L 100,105 Q 80,115 60,105 Z" fill="url(#robe-gradient)"/>
+  
+  <!-- Arms -->
+  <ellipse cx="55" cy="85" rx="8" ry="15" fill="url(#figure-gradient)" transform="rotate(-20 55 85)"/>
+  <ellipse cx="105" cy="85" rx="8" ry="15" fill="url(#figure-gradient)" transform="rotate(20 105 85)"/>
+  
+  <!-- Hands holding objects -->
+  <circle cx="45" cy="95" r="4" fill="url(#figure-gradient)"/>
+  <circle cx="115" cy="95" r="4" fill="url(#figure-gradient)"/>
+  
+  <!-- Sacred objects -->
+  <ellipse cx="45" cy="100" rx="3" ry="6" fill="#d4af37"/>
+  <ellipse cx="115" cy="100" rx="3" ry="6" fill="#d4af37"/>
+  
+  <!-- Divination symbols at bottom -->
+  <g fill="#8b4513">
+    <circle cx="70" cy="125" r="3"/>
+    <circle cx="80" cy="125" r="3"/>
+    <circle cx="90" cy="125" r="3"/>
+  </g>
+  
+  <!-- Sacred lines -->
+  <g stroke="#d4af37" stroke-width="1" fill="none">
+    <path d="M 65,130 L 95,130"/>
+    <path d="M 67,133 L 93,133"/>
+  </g>
+  
+  <!-- Spiritual aura -->
+  <circle cx="80" cy="80" r="78" fill="none" stroke="#f7e98e" stroke-width="1" opacity="0.3"/>
+</svg>

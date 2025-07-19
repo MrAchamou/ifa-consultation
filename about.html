@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À propos de l'Ifá - Consultation Ifá</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #d4af37;
+            --accent-light: #f7e98e;
+            --text-color: #2d3748;
+            --text-light: #718096;
+            --bg-color: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 30px 80px rgba(0, 0, 0, 0.15);
+            --gradient-main: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --gradient-accent: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+            --gradient-soft: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        }
+
+        [data-theme="dark"] {
+            --text-color: #f7fafc;
+            --text-light: #cbd5e0;
+            --bg-color: #1a202c;
+            --card-bg: rgba(45, 55, 72, 0.95);
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            --shadow-hover: 0 30px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--gradient-main);
+            min-height: 100vh;
+            color: var(--text-color);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 60px 0;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: block;
+            box-shadow: 0 20px 50px rgba(0, 100, 80, 0.4), 0 10px 25px rgba(212, 175, 55, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            position: relative;
+        }
+
+        .logo:hover {
+            transform: scale(1.08) rotate(3deg);
+            box-shadow: 0 25px 60px rgba(0, 100, 80, 0.5), 0 15px 35px rgba(212, 175, 55, 0.4);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 50%, #00a86b 100%);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .logo:hover::after {
+            opacity: 0.7;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            background: var(--card-bg);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.4rem;
+            color: var(--text-color);
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .nav-home {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            background: var(--card-bg);
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-home:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            color: var(--primary-color);
+        }
+
+        .nav-home i {
+            margin-right: 8px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 35px;
+            margin-bottom: 60px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 45px;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-soft);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card:hover::before {
+            opacity: 0.5;
+        }
+
+        .card-icon {
+            font-size: 3.5rem;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.1);
+        }
+
+        .card h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        .card p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            font-weight: 500;
+            text-align: justify;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card li {
+            padding: 12px 0;
+            position: relative;
+            padding-left: 35px;
+            color: var(--text-color);
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .card li:before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-size: 1.2em;
+        }
+
+        .faq-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .faq-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-soft);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .faq-item {
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+            padding-bottom: 25px;
+        }
+
+        .faq-question {
+            font-weight: 700;
+            font-size: 1.2rem;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .faq-answer {
+            color: var(--text-color);
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .cta-btn {
+            background: var(--gradient-main);
+            color: white;
+            text-decoration: none;
+            padding: 20px 45px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: inline-block;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cta-btn:hover::before {
+            left: 100%;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.5);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .card {
+                padding: 35px 25px;
+            }
+
+            .faq-section {
+                padding: 35px 25px;
+            }
+            
+            .nav-home, .theme-toggle {
+                position: relative;
+                top: 0;
+                left: 0;
+                right: 0;
+                margin-bottom: 20px;
+                display: block;
+                text-align: center;
+            }
+
+            .theme-toggle {
+                float: right;
+                margin-bottom: 10px;
+            }
+
+            .logo {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.4rem;
+            }
+
+            .card h2 {
+                font-size: 1.7rem;
+            }
+
+            .card-icon {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="nav-home" id="nav-home">
+        <i class="fas fa-home"></i> Accueil
+    </a>
+    
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon" id="theme-icon"></i>
+    </button>
+
+    <div class="container">
+        <div class="header">
+            <img src="logo.png" alt="Logo Ifá" class="logo">
+            <h1 id="main-title">L'Art de l'Ifá</h1>
+            <p class="subtitle" id="subtitle">Découvrez la sagesse ancestrale yoruba et l'art divinatoire millénaire</p>
+        </div>
+
+        <div class="content-grid">
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-history"></i>
+                </div>
+                <h2 id="history-title">Histoire et Origine</h2>
+                <p id="history-content">L'Ifá est un système de divination ancestral originaire du peuple yoruba d'Afrique de l'Ouest. Vieux de plus de 3000 ans, cet art divinatoire a été reconnu par l'UNESCO comme "Chef-d'œuvre du patrimoine oral et immatériel de l'humanité".</p>
+                <p>Cette tradition spirituelle repose sur la sagesse d'Orunmila, l'orisha de la sagesse et de la divination, qui guide les consultants vers leur destinée.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <h2 id="philosophy-title">Philosophie de l'Ifá</h2>
+                <p id="philosophy-content">L'Ifá n'est pas seulement un système de divination, c'est une philosophie de vie complète qui enseigne l'équilibre, la sagesse et l'harmonie avec les forces naturelles et spirituelles.</p>
+                <p>Il guide les individus dans leurs choix de vie, les aide à comprendre leur destinée et à naviguer les défis avec sagesse ancestrale.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h2 id="consultations-title">Types de Consultations</h2>
+                <ul id="consultations-list">
+                    <li id="consult-general">Consultation générale sur votre destinée</li>
+                    <li id="consult-guidance">Guidance pour les décisions importantes</li>
+                    <li id="consult-love">Questions sur la vie sentimentale</li>
+                    <li id="consult-career">Orientation professionnelle et carrière</li>
+                    <li id="consult-health">Conseils pour la santé et le bien-être</li>
+                    <li id="consult-spiritual">Développement spirituel personnel</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <h2 id="requests-title">Types de Demandes Spécifiques</h2>
+                <ul id="requests-list">
+                    <li id="request-love">Amour</li>
+                    <li id="request-health">Santé</li>
+                    <li id="request-prosperity">Prospérité</li>
+                    <li id="request-work">Évolution dans le domaine du travail</li>
+                    <li id="request-luck">Avoir plus de chance dans la vie</li>
+                    <li id="request-cleansing">Nettoyage des malédictions et mauvais œils</li>
+                    <li id="request-spells">Jets de sorts</li>
+                    <li id="request-other">Pour toute autre demande, veuillez le préciser dans le formulaire</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h2 id="interpreter-title">Rôle de l'Interprète</h2>
+                <div id="interpreter-content">
+                    <p>En tant qu'interprète professionnel certifié des maîtres Fâ du Bénin, je facilite la communication entre vous et les véritables détenteurs de cette sagesse ancestrale.</p>
+                    <p>Mon rôle consiste à transmettre fidèlement votre demande aux maîtres Fâ et à vous restituer leurs recommandations avec précision et respect.</p>
+                    <p>Le Fâ est une science spirituelle unique qui ne se base pas sur les astres ou autres éléments extérieurs, mais recherche avant tout l'équilibre harmonieux, qu'il soit interne à l'être humain ou dans ses relations avec son environnement.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h2 id="process-title">Notre Processus</h2>
+                <div id="process-content">
+                    <p>Une fois votre demande envoyée, elle est transmise directement aux maîtres Fâ authentiques au Bénin. Ces détenteurs de la tradition millénaire procèdent à la consultation selon les rites ancestraux.</p>
+                    <p>Vous recevrez ensuite par email une interprétation détaillée personnalisée, accompagnée d'un document PDF complet et, si nécessaire, d'un enregistrement audio pour une guidance complète.</p>
+                    <p>Chaque consultation est unique et adaptée à votre situation personnelle, respectant les codes traditionnels de cette pratique sacrée.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-section">
+            <h2 style="text-align: center; margin-bottom: 40px; font-size: 2.5rem; background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Questions Fréquentes</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question" id="faq-q1">Qu'est-ce qui rend cette consultation authentique ?</div>
+                <div class="faq-answer" id="faq-a1">Nos consultations sont réalisées par de véritables maîtres Fâ au Bénin, détenteurs de la tradition ancestrale. En tant qu'interprète certifié, je garantis une transmission fidèle de leurs enseignements.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" id="faq-q2">Dans quel délai vais-je recevoir ma réponse ?</div>
+                <div class="faq-answer" id="faq-a2">La consultation traditionnelle nécessite du temps et du respect des rites. Vous recevrez généralement votre réponse complète sous 48 à 72 heures par email.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" id="faq-q3">Sous quelle forme vais-je recevoir ma consultation ?</div>
+                <div class="faq-answer" id="faq-a3">Vous recevrez un email détaillé avec un document PDF complet de votre consultation. Si nécessaire, un enregistrement audio peut également être fourni pour une guidance plus approfondie.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" id="faq-q4">Puis-je poser une question de suivi ?</div>
+                <div class="faq-answer" id="faq-a4">Oui, une question de clarification est généralement acceptée suite à votre consultation initiale. Les questions complémentaires importantes peuvent faire l'objet d'une nouvelle consultation.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" id="faq-q5">Est-ce que mes informations personnelles sont protégées ?</div>
+                <div class="faq-answer" id="faq-a5">Absolument. Toutes les informations partagées dans le cadre de votre consultation sont traitées avec la plus stricte confidentialité, conformément aux traditions sacrées de l'Ifá.</div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <a href="index.html" class="cta-btn" id="cta-btn">Commencer ma consultation</a>
+        </div>
+    </div>
+
+    <script>
+        // Détection automatique de la langue
+        const lang = navigator.language.split("-")[0];
+        
+        const translations = {
+            fr: {
+                navHome: "Accueil",
+                mainTitle: "L'Art de l'Ifá",
+                subtitle: "Découvrez la sagesse ancestrale yoruba et l'art divinatoire millénaire",
+                historyTitle: "Histoire et Origine",
+                philosophyTitle: "Philosophie de l'Ifá",
+                consultationsTitle: "Types de Consultations",
+                requestsTitle: "Types de Demandes Spécifiques",
+                interpreterTitle: "Rôle de l'Interprète",
+                processTitle: "Notre Processus",
+                ctaBtn: "Commencer ma consultation"
+            },
+            en: {
+                navHome: "Home",
+                mainTitle: "The Art of Ifá",
+                subtitle: "Discover the ancestral Yoruba wisdom and millennial divinatory art",
+                historyTitle: "History and Origin",
+                philosophyTitle: "Philosophy of Ifá",
+                consultationsTitle: "Types of Consultations",
+                requestsTitle: "Types of Specific Requests",
+                interpreterTitle: "Role of the Interpreter",
+                processTitle: "Our Process",
+                ctaBtn: "Start my consultation"
+            },
+            es: {
+                navHome: "Inicio",
+                mainTitle: "El Arte del Ifá",
+                subtitle: "Descubre la sabiduría ancestral yoruba y el arte divinatorio milenario",
+                historyTitle: "Historia y Origen",
+                philosophyTitle: "Filosofía del Ifá",
+                consultationsTitle: "Tipos de Consultas",
+                requestsTitle: "Tipos de Solicitudes Específicas",
+                interpreterTitle: "Papel del Intérprete",
+                processTitle: "Nuestro Proceso",
+                ctaBtn: "Comenzar mi consulta"
+            }
+        };
+
+        if (translations[lang]) {
+            const t = translations[lang];
+            document.getElementById("nav-home").innerHTML = `<i class="fas fa-home"></i> ${t.navHome}`;
+            document.getElementById("main-title").textContent = t.mainTitle;
+            document.getElementById("subtitle").textContent = t.subtitle;
+            document.getElementById("history-title").textContent = t.historyTitle;
+            document.getElementById("philosophy-title").textContent = t.philosophyTitle;
+            document.getElementById("consultations-title").textContent = t.consultationsTitle;
+            document.getElementById("requests-title").textContent = t.requestsTitle;
+            document.getElementById("interpreter-title").textContent = t.interpreterTitle;
+            document.getElementById("process-title").textContent = t.processTitle;
+            document.getElementById("cta-btn").textContent = t.ctaBtn;
+        }
+
+        // Gestion du thème sombre/clair
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            const icon = document.getElementById('theme-icon');
+            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // Charger le thème sauvegardé
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        const icon = document.getElementById('theme-icon');
+        icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+        // Animation d'entrée des éléments
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        document.querySelectorAll('.card, .faq-section').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>

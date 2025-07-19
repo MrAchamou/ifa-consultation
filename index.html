@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultation Ifá - Terre des Mystères</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #d4af37;
+            --accent-light: #f7e98e;
+            --text-color: #2d3748;
+            --text-light: #718096;
+            --bg-color: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --input-bg: rgba(255, 255, 255, 0.9);
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 30px 80px rgba(0, 0, 0, 0.15);
+            --border-color: #e2e8f0;
+            --gradient-main: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            --gradient-accent: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-light) 100%);
+            --gradient-soft: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        }
+
+        [data-theme="dark"] {
+            --text-color: #f7fafc;
+            --text-light: #cbd5e0;
+            --bg-color: #1a202c;
+            --card-bg: rgba(45, 55, 72, 0.95);
+            --input-bg: rgba(255, 255, 255, 0.95);
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            --shadow-hover: 0 30px 80px rgba(0, 0, 0, 0.5);
+            --border-color: #4a5568;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--gradient-main);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--text-color);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 50px 40px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-soft);
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 25px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Intégration harmonieuse avec le formulaire papier */
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            /* Le fond blanc du logo se fond avec le fond du formulaire */
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.08));
+            /* Légère ombre douce pour définir les contours sans être intrusive */
+        }
+        
+        h1 {
+            font-size: 3rem;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            font-weight: 800;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+        
+        .subtitle {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            font-weight: 500;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        .form-group {
+            margin-bottom: 30px;
+            animation: slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            animation-fill-mode: both;
+        }
+        
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.15s; }
+        .form-group:nth-child(3) { animation-delay: 0.2s; }
+        .form-group:nth-child(4) { animation-delay: 0.25s; }
+        .form-group:nth-child(5) { animation-delay: 0.3s; }
+        .form-group:nth-child(6) { animation-delay: 0.35s; }
+        .form-group:nth-child(7) { animation-delay: 0.4s; }
+        .form-group:nth-child(8) { animation-delay: 0.45s; }
+        .form-group:nth-child(9) { animation-delay: 0.5s; }
+        .form-group:nth-child(10) { animation-delay: 0.55s; }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 1rem;
+            letter-spacing: 0.01em;
+            position: relative;
+        }
+
+        label i {
+            margin-right: 8px;
+            color: var(--accent-color);
+            font-size: 0.9em;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            font-size: 1rem;
+            font-family: inherit;
+            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--input-bg);
+            backdrop-filter: blur(10px);
+            color: #2d3748;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15), 0 4px 20px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        input:hover, textarea:hover, select:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        input::placeholder, textarea::placeholder {
+            color: #a0aec0;
+            font-weight: 400;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+        
+        .radio-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-top: 15px;
+        }
+        
+        .radio-item {
+            position: relative;
+        }
+        
+        .radio-item input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .radio-label {
+            display: flex;
+            align-items: center;
+            padding: 18px 22px;
+            background: var(--input-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+            color: #2d3748;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .radio-label::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-soft);
+            transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 0;
+        }
+
+        .radio-label > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .radio-label:hover::before {
+            left: 0;
+        }
+
+        .radio-label:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .radio-label i {
+            margin-right: 12px;
+            font-size: 1.1em;
+            color: var(--accent-color);
+            transition: all 0.3s ease;
+        }
+        
+        .radio-item input[type="radio"]:checked + .radio-label {
+            background: var(--gradient-main);
+            border-color: var(--primary-color);
+            color: white;
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .radio-item input[type="radio"]:checked + .radio-label i {
+            color: var(--accent-light);
+        }
+
+        .file-info {
+            margin-top: 8px;
+        }
+
+        .file-info small {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 20px;
+            background: var(--gradient-main);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .submit-btn.loading {
+            pointer-events: none;
+        }
+
+        .submit-btn.loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .required {
+            color: #e53e3e;
+            font-weight: 700;
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            background: var(--card-bg);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.4rem;
+            color: var(--text-color);
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .nav-about {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            background: var(--card-bg);
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-about:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            color: var(--primary-color);
+        }
+
+        .nav-about i {
+            margin-right: 8px;
+        }
+
+        .error-message {
+            color: #e53e3e;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .error-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #38a169 0%, #48bb78 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            font-weight: 600;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .success-message.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Styles pour l'auto-complétion des pays */
+        .country-suggestions {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 5px;
+            max-height: 200px;
+            overflow-y: auto;
+            position: absolute;
+            width: calc(100% - 2px);
+            z-index: 1000;
+            display: none;
+        }
+
+        .country-suggestion {
+            padding: 12px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .country-suggestion:hover,
+        .country-suggestion.selected {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .country-suggestion:last-child {
+            border-bottom: none;
+        }
+
+        /* Aperçu photo */
+        .photo-preview {
+            margin-top: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .photo-preview img {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 10px;
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .remove-photo {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .remove-photo:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+
+        /* Compteur de caractères */
+        .char-counter {
+            text-align: right;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .char-counter.warning {
+            color: #f39c12;
+        }
+
+        .char-counter.danger {
+            color: #e74c3c;
+        }
+
+        /* Barre de progression */
+        .progress-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            height: 20px;
+            margin: 20px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            width: 0%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-color);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Validation temps réel */
+        .form-group.valid input,
+        .form-group.valid textarea {
+            border-color: #27ae60;
+            box-shadow: 0 0 10px rgba(39, 174, 96, 0.2);
+        }
+
+        .form-group.invalid input,
+        .form-group.invalid textarea {
+            border-color: #e74c3c;
+            box-shadow: 0 0 10px rgba(231, 76, 60, 0.2);
+        }
+
+        .validation-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+        }
+
+        .validation-icon.valid {
+            color: #27ae60;
+        }
+
+        .validation-icon.invalid {
+            color: #e74c3c;
+        }
+
+        /* Animation de soumission */
+        .submit-btn.loading {
+            position: relative;
+            color: transparent;
+        }
+
+        .submit-btn.loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Animation de sauvegarde */
+        .auto-save-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(39, 174, 96, 0.9);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: none;
+            z-index: 1000;
+            animation: fadeInOut 2s ease;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; transform: translateY(-10px); }
+            50% { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .container {
+                padding: 35px 25px;
+                border-radius: 20px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .radio-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-about, .theme-toggle {
+                position: relative;
+                top: 0;
+                left: 0;
+                right: 0;
+                margin-bottom: 20px;
+                display: block;
+                text-align: center;
+            }
+
+            .theme-toggle {
+                float: right;
+                margin-bottom: 10px;
+            }
+
+            .logo {
+                width: 90px;
+                height: 90px;
+                margin: 0 auto 20px;
+            }
+
+            .form-group {
+                margin-bottom: 25px;
+            }
+
+            input, textarea, select {
+                padding: 14px 18px;
+            }
+
+            .radio-label {
+                padding: 16px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.9rem;
+            }
+
+            .radio-group {
+                gap: 12px;
+            }
+
+            .radio-label {
+                padding: 14px 16px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="about.html" class="nav-about" id="nav-about">
+        <i class="fas fa-info-circle"></i> À propos de l'Ifá
+    </a>
+    
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon" id="theme-icon"></i>
+    </button>
+
+    <div class="auto-save-indicator" id="auto-save-indicator">
+        <i class="fas fa-save"></i> Données sauvegardées
+    </div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="logo.png" alt="Ifá Consultation Logo">
+            </div>
+            <h1 id="main-title">Consultation Ifá personnalisée</h1>
+            <p class="subtitle" id="subtitle">Découvrez votre destinée à travers la sagesse ancestrale yoruba</p>
+        </div>
+        
+        <form id="consultation-form" action="https://formsubmit.co/terredesmysteres@gmail.com" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="_next" id="redirect-url" value="./merci.html">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="Nouvelle demande de consultation Ifá">
+            <input type="hidden" name="_template" value="table">
+            
+            <div class="form-group">
+                <label for="fullname" id="label-fullname">
+                    <i class="fas fa-user"></i>Prénom et nom <span class="required">*</span>
+                </label>
+                <input type="text" id="fullname" name="fullname" required placeholder="Entrez votre prénom et nom">
+                <div class="error-message" id="error-fullname"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="birthdate" id="label-birthdate">
+                    <i class="fas fa-calendar-alt"></i>Date de naissance <span class="required">*</span>
+                </label>
+                <input type="date" id="birthdate" name="birthdate" required>
+                <div class="error-message" id="error-birthdate"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="birthplace" id="label-birthplace">
+                    <i class="fas fa-map-marker-alt"></i>Lieu de naissance <span class="required">*</span>
+                </label>
+                <input type="text" id="birthplace" name="birthplace" required placeholder="Ville de naissance">
+                <div class="error-message" id="error-birthplace"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="country" id="label-country">
+                    <i class="fas fa-globe"></i>Pays <span class="required">*</span>
+                </label>
+                <input type="text" id="country" name="country" required placeholder="Pays de résidence" autocomplete="country">
+                <div class="country-suggestions" id="country-suggestions"></div>
+                <div class="error-message" id="error-country"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="mother-name" id="label-mother-name">
+                    <i class="fas fa-heart"></i>Nom de la mère <span class="required">*</span>
+                </label>
+                <input type="text" id="mother-name" name="mother-name" required placeholder="Nom complet de la mère">
+                <div class="error-message" id="error-mother-name"></div>
+            </div>
+            
+            <div class="form-group">
+                <label for="consultation-type" id="label-consultation-type">
+                    <i class="fas fa-star"></i>Type de consultation <span class="required">*</span>
+                </label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="general" name="consultation-type" value="Consultation générale" required>
+                        <label for="general" class="radio-label">
+                            <i class="fas fa-compass"></i>Consultation générale
+                        </label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="specific" name="consultation-type" value="Demande spécifique" required>
+                        <label for="specific" class="radio-label">
+                            <i class="fas fa-bullseye"></i>Demande spécifique
+                        </label>
+                    </div>
+                </div>
+                <div class="error-message" id="error-consultation-type"></div>
+            </div>
+            
+            <div class="form-group" id="specific-request-group" style="display: none;">
+                <label for="specific-request" id="label-specific-request">
+                    <i class="fas fa-list"></i>Type de demande spécifique
+                </label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="love" name="specific-request" value="Amour">
+                        <label for="love" class="radio-label">
+                            <i class="fas fa-heart"></i>Amour
+                        </label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="health" name="specific-request" value="Santé">
+                        <label for="health" class="radio-label">
+                            <i class="fas fa-heartbeat"></i>Santé
+                        </label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="prosperity" name="specific-request" value="Prospérité">
+                        <label for="prosperity" class="radio-label">
+                            <i class="fas fa-coins"></i>Prospérité
+                        </label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="work" name="specific-request" value="Évolution dans le domaine du travail">
+                        <label for="work" class="radio-label">
+                            <i class="fas fa-briefcase"></i>Évolution travail
+                        </label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="luck" name="specific-request" value="Avoir plus de chance dans la vie">
+                        <label for="luck" class="radio-label">
+                            <i class="fas fa-clover"></i>Plus de chance
+                        </label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="cleansing" name="specific-request" value="Nettoyage des malédictions et mauvais œils">
+                        <label for="cleansing" class="radio-label">
+                            <i class="fas fa-shield-alt"></i>Nettoyage spirituel
+                        </label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="spells" name="specific-request" value="Jets de sorts">
+                        <label for="spells" class="radio-label">
+                            <i class="fas fa-magic"></i>Jets de sorts
+                        </label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="other-request" name="specific-request" value="Autre">
+                        <label for="other-request" class="radio-label">
+                            <i class="fas fa-ellipsis-h"></i>Autre demande
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" id="other-request-group" style="display: none;">
+                <label for="other-request-text" id="label-other-request-text">
+                    <i class="fas fa-edit"></i>Précisez votre demande
+                </label>
+                <textarea id="other-request-text" name="other-request-text" placeholder="Décrivez précisément votre demande..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="language" id="label-language">
+                    <i class="fas fa-language"></i>Langue préférée pour la réponse <span class="required">*</span>
+                </label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="french" name="language" value="Français" required>
+                        <label for="french" class="radio-label">
+                            <i class="fas fa-flag"></i>Français
+                        </label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="english" name="language" value="English" required>
+                        <label for="english" class="radio-label">
+                            <i class="fas fa-flag"></i>English
+                        </label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="spanish" name="language" value="Español" required>
+                        <label for="spanish" class="radio-label">
+                            <i class="fas fa-flag"></i>Español
+                        </label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="other-lang" name="language" value="Autre langue" required>
+                        <label for="other-lang" class="radio-label">
+                            <i class="fas fa-globe"></i>Autre langue
+                        </label>
+                    </div>
+                </div>
+                <div class="error-message" id="error-language"></div>
+            </div>
+
+            <div class="form-group" id="other-language-group" style="display: none;">
+                <label for="other-language" id="label-other-language">
+                    <i class="fas fa-comment"></i>Précisez la langue souhaitée
+                </label>
+                <input type="text" id="other-language" name="other-language" placeholder="Quelle langue préférez-vous ?">
+            </div>
+            
+            <div class="form-group">
+                <label for="photo" id="label-photo">
+                    <i class="fas fa-camera"></i>Photo personnelle (optionnel)
+                </label>
+                <input type="file" id="photo" name="photo" accept="image/*">
+                <div class="file-info">
+                    <small id="photo-info">Formats acceptés : JPG, PNG, GIF. Taille max : 5MB</small>
+                </div>
+                <div class="photo-preview" id="photo-preview" style="display: none;">
+                    <img id="preview-image" src="" alt="Aperçu">
+                    <button type="button" class="remove-photo" onclick="removePhoto()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="details" id="label-details">
+                    <i class="fas fa-comment-dots"></i>Détails supplémentaires (optionnel)
+                </label>
+                <textarea id="details" name="details" placeholder="Ajoutez des informations complémentaires qui pourraient être utiles pour votre consultation..." maxlength="1000"></textarea>
+                <div class="char-counter">
+                    <span id="char-count">0</span>/1000 caractères
+                </div>
+            </div>
+            
+            <!-- Barre de progression -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+                <div class="progress-text" id="progress-text">0% complété</div>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submit-btn">
+                <span id="submit-text">Demander ma consultation</span>
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Détection automatique de la langue
+        const lang = navigator.language.split("-")[0];
+        
+        const translations = {
+            fr: {
+                title: "Consultation Ifá personnalisée",
+                subtitle: "Découvrez votre destinée à travers la sagesse ancestrale yoruba",
+                navAbout: "À propos de l'Ifá",
+                labelFullname: "Prénom et nom",
+                labelBirthdate: "Date de naissance",
+                labelBirthplace: "Lieu de naissance",
+                labelCountry: "Pays",
+                labelMotherName: "Nom de la mère",
+                labelConsultationType: "Type de consultation",
+                labelSpecificRequest: "Type de demande spécifique",
+                labelOtherRequest: "Précisez votre demande",
+                labelLanguage: "Langue préférée pour la réponse",
+                labelOtherLanguage: "Précisez la langue souhaitée",
+                labelPhoto: "Photo personnelle (optionnel)",
+                labelDetails: "Détails supplémentaires (optionnel)",
+                submitBtn: "Demander ma consultation",
+                consultationGeneral: "Consultation générale",
+                consultationSpecific: "Demande spécifique",
+                requestLove: "Amour",
+                requestHealth: "Santé",
+                requestProsperity: "Prospérité",
+                requestWork: "Évolution travail",
+                requestLuck: "Plus de chance",
+                requestCleansing: "Nettoyage spirituel",
+                requestSpells: "Jets de sorts",
+                requestOther: "Autre demande",
+                langFrench: "Français",
+                langEnglish: "English",
+                langSpanish: "Español",
+                langOther: "Autre langue",
+                photoInfo: "Formats acceptés : JPG, PNG, GIF. Taille max : 5MB",
+                placeholderName: "Entrez votre prénom et nom",
+                placeholderBirthplace: "Ville de naissance",
+                placeholderCountry: "Pays de résidence",
+                placeholderMotherName: "Nom complet de la mère",
+                placeholderOtherRequest: "Décrivez précisément votre demande...",
+                placeholderOtherLang: "Quelle langue préférez-vous ?",
+                placeholderDetails: "Ajoutez des informations complémentaires qui pourraient être utiles pour votre consultation..."
+            },
+            en: {
+                title: "Personalized Ifá Consultation",
+                subtitle: "Discover your destiny through ancestral Yoruba wisdom",
+                navAbout: "About Ifá",
+                labelFullname: "First and last name",
+                labelBirthdate: "Date of birth",
+                labelBirthplace: "Place of birth",
+                labelCountry: "Country",
+                labelMotherName: "Mother's name",
+                labelConsultationType: "Consultation type",
+                labelSpecificRequest: "Type of specific request",
+                labelOtherRequest: "Specify your request",
+                labelLanguage: "Preferred language for response",
+                labelOtherLanguage: "Specify desired language",
+                labelPhoto: "Personal photo (optional)",
+                labelDetails: "Additional details (optional)",
+                submitBtn: "Request my consultation",
+                consultationGeneral: "General consultation",
+                consultationSpecific: "Specific request",
+                requestLove: "Love",
+                requestHealth: "Health",
+                requestProsperity: "Prosperity",
+                requestWork: "Career evolution",
+                requestLuck: "More luck",
+                requestCleansing: "Spiritual cleansing",
+                requestSpells: "Spell casting",
+                requestOther: "Other request",
+                langFrench: "Français",
+                langEnglish: "English",
+                langSpanish: "Español",
+                langOther: "Other language",
+                photoInfo: "Accepted formats: JPG, PNG, GIF. Max size: 5MB",
+                placeholderName: "Enter your first and last name",
+                placeholderBirthplace: "City of birth",
+                placeholderCountry: "Country of residence",
+                placeholderMotherName: "Mother's full name",
+                placeholderOtherRequest: "Describe precisely your request...",
+                placeholderOtherLang: "Which language do you prefer?",
+                placeholderDetails: "Add additional information that could be useful for your consultation..."
+            },
+            es: {
+                title: "Consulta Ifá Personalizada",
+                subtitle: "Descubre tu destino a través de la sabiduría ancestral yoruba",
+                navAbout: "Acerca del Ifá",
+                labelFullname: "Nombre y apellido",
+                labelBirthdate: "Fecha de nacimiento",
+                labelBirthplace: "Lugar de nacimiento",
+                labelCountry: "País",
+                labelMotherName: "Nombre de la madre",
+                labelConsultationType: "Tipo de consulta",
+                labelSpecificRequest: "Tipo de solicitud específica",
+                labelOtherRequest: "Especifica tu solicitud",
+                labelLanguage: "Idioma preferido para la respuesta",
+                labelOtherLanguage: "Especifica el idioma deseado",
+                labelPhoto: "Foto personal (opcional)",
+                labelDetails: "Detalles adicionales (opcional)",
+                submitBtn: "Solicitar mi consulta",
+                consultationGeneral: "Consulta general",
+                consultationSpecific: "Solicitud específica",
+                requestLove: "Amor",
+                requestHealth: "Salud",
+                requestProsperity: "Prosperidad",
+                requestWork: "Evolución laboral",
+                requestLuck: "Más suerte",
+                requestCleansing: "Limpieza espiritual",
+                requestSpells: "Lanzamiento de hechizos",
+                requestOther: "Otra solicitud",
+                langFrench: "Français",
+                langEnglish: "English",
+                langSpanish: "Español",
+                langOther: "Otro idioma",
+                photoInfo: "Formatos aceptados: JPG, PNG, GIF. Tamaño máx: 5MB",
+                placeholderName: "Ingresa tu nombre y apellido",
+                placeholderBirthplace: "Ciudad de nacimiento",
+                placeholderCountry: "País de residencia",
+                placeholderMotherName: "Nombre completo de la madre",
+                placeholderOtherRequest: "Describe precisamente tu solicitud...",
+                placeholderOtherLang: "¿Qué idioma prefieres?",
+                placeholderDetails: "Añade información adicional que pueda ser útil para tu consulta..."
+            }
+        };
+
+        // Application des traductions
+        if (translations[lang]) {
+            const t = translations[lang];
+            document.getElementById("main-title").textContent = t.title;
+            document.getElementById("subtitle").textContent = t.subtitle;
+            document.getElementById("nav-about").innerHTML = `<i class="fas fa-info-circle"></i> ${t.navAbout}`;
+            
+            // Labels
+            document.getElementById("label-fullname").innerHTML = `<i class="fas fa-user"></i>${t.labelFullname} <span class="required">*</span>`;
+            document.getElementById("label-birthdate").innerHTML = `<i class="fas fa-calendar-alt"></i>${t.labelBirthdate} <span class="required">*</span>`;
+            document.getElementById("label-birthplace").innerHTML = `<i class="fas fa-map-marker-alt"></i>${t.labelBirthplace} <span class="required">*</span>`;
+            document.getElementById("label-country").innerHTML = `<i class="fas fa-globe"></i>${t.labelCountry} <span class="required">*</span>`;
+            document.getElementById("label-mother-name").innerHTML = `<i class="fas fa-heart"></i>${t.labelMotherName} <span class="required">*</span>`;
+            document.getElementById("label-consultation-type").innerHTML = `<i class="fas fa-star"></i>${t.labelConsultationType} <span class="required">*</span>`;
+            document.getElementById("label-specific-request").innerHTML = `<i class="fas fa-list"></i>${t.labelSpecificRequest}`;
+            document.getElementById("label-other-request-text").innerHTML = `<i class="fas fa-edit"></i>${t.labelOtherRequest}`;
+            document.getElementById("label-language").innerHTML = `<i class="fas fa-language"></i>${t.labelLanguage} <span class="required">*</span>`;
+            document.getElementById("label-other-language").innerHTML = `<i class="fas fa-comment"></i>${t.labelOtherLanguage}`;
+            document.getElementById("label-photo").innerHTML = `<i class="fas fa-camera"></i>${t.labelPhoto}`;
+            document.getElementById("label-details").innerHTML = `<i class="fas fa-comment-dots"></i>${t.labelDetails}`;
+            
+            // Placeholders
+            document.getElementById("fullname").placeholder = t.placeholderName;
+            document.getElementById("birthplace").placeholder = t.placeholderBirthplace;
+            document.getElementById("country").placeholder = t.placeholderCountry;
+            document.getElementById("mother-name").placeholder = t.placeholderMotherName;
+            document.getElementById("other-request-text").placeholder = t.placeholderOtherRequest;
+            document.getElementById("other-language").placeholder = t.placeholderOtherLang;
+            document.getElementById("details").placeholder = t.placeholderDetails;
+            
+            // Radio button labels
+            document.querySelector('label[for="general"]').innerHTML = `<i class="fas fa-compass"></i>${t.consultationGeneral}`;
+            document.querySelector('label[for="specific"]').innerHTML = `<i class="fas fa-bullseye"></i>${t.consultationSpecific}`;
+            document.querySelector('label[for="love"]').innerHTML = `<i class="fas fa-heart"></i>${t.requestLove}`;
+            document.querySelector('label[for="health"]').innerHTML = `<i class="fas fa-heartbeat"></i>${t.requestHealth}`;
+            document.querySelector('label[for="prosperity"]').innerHTML = `<i class="fas fa-coins"></i>${t.requestProsperity}`;
+            document.querySelector('label[for="work"]').innerHTML = `<i class="fas fa-briefcase"></i>${t.requestWork}`;
+            document.querySelector('label[for="luck"]').innerHTML = `<i class="fas fa-clover"></i>${t.requestLuck}`;
+            document.querySelector('label[for="cleansing"]').innerHTML = `<i class="fas fa-shield-alt"></i>${t.requestCleansing}`;
+            document.querySelector('label[for="spells"]').innerHTML = `<i class="fas fa-magic"></i>${t.requestSpells}`;
+            document.querySelector('label[for="other-request"]').innerHTML = `<i class="fas fa-ellipsis-h"></i>${t.requestOther}`;
+            document.querySelector('label[for="french"]').innerHTML = `<i class="fas fa-flag"></i>${t.langFrench}`;
+            document.querySelector('label[for="english"]').innerHTML = `<i class="fas fa-flag"></i>${t.langEnglish}`;
+            document.querySelector('label[for="spanish"]').innerHTML = `<i class="fas fa-flag"></i>${t.langSpanish}`;
+            document.querySelector('label[for="other-lang"]').innerHTML = `<i class="fas fa-globe"></i>${t.langOther}`;
+            
+            document.getElementById("photo-info").textContent = t.photoInfo;
+            document.getElementById("submit-text").textContent = t.submitBtn;
+        }
+
+        // Gestion du thème sombre/clair
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            const icon = document.getElementById('theme-icon');
+            icon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // Charger le thème sauvegardé
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        const icon = document.getElementById('theme-icon');
+        icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+        // Gestion des champs conditionnels
+        const consultationTypeInputs = document.querySelectorAll('input[name="consultation-type"]');
+        const specificRequestGroup = document.getElementById('specific-request-group');
+        
+        consultationTypeInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                if (this.value === 'Demande spécifique') {
+                    specificRequestGroup.style.display = 'block';
+                    specificRequestGroup.style.animation = 'slideInLeft 0.6s ease-out';
+                } else {
+                    specificRequestGroup.style.display = 'none';
+                    document.getElementById('other-request-group').style.display = 'none';
+                }
+            });
+        });
+
+        const specificRequestInputs = document.querySelectorAll('input[name="specific-request"]');
+        const otherRequestGroup = document.getElementById('other-request-group');
+        
+        specificRequestInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                if (this.value === 'Autre') {
+                    otherRequestGroup.style.display = 'block';
+                    otherRequestGroup.style.animation = 'slideInLeft 0.6s ease-out';
+                } else {
+                    otherRequestGroup.style.display = 'none';
+                }
+            });
+        });
+
+        const languageInputs = document.querySelectorAll('input[name="language"]');
+        const otherLanguageGroup = document.getElementById('other-language-group');
+        
+        languageInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                if (this.value === 'Autre langue') {
+                    otherLanguageGroup.style.display = 'block';
+                    otherLanguageGroup.style.animation = 'slideInLeft 0.6s ease-out';
+                } else {
+                    otherLanguageGroup.style.display = 'none';
+                }
+            });
+        });
+
+        // Validation du formulaire
+        const form = document.getElementById('consultation-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const submitText = document.getElementById('submit-text');
+
+        // Validation en temps réel
+        function validateField(field) {
+            const errorElement = document.getElementById(`error-${field.id}`);
+            let isValid = true;
+            let errorMessage = '';
+
+            if (field.hasAttribute('required') && !field.value.trim()) {
+                isValid = false;
+                errorMessage = 'Ce champ est obligatoire';
+
+            } else if (field.type === 'date' && field.value) {
+                const birthDate = new Date(field.value);
+                const today = new Date();
+                const age = today.getFullYear() - birthDate.getFullYear();
+                if (age < 16 || age > 120) {
+                    isValid = false;
+                    errorMessage = 'Veuillez entrer une date de naissance valide';
+                }
+            }
+
+            if (errorElement) {
+                if (isValid) {
+                    errorElement.textContent = '';
+                    errorElement.classList.remove('show');
+                    field.style.borderColor = '#38a169';
+                } else {
+                    errorElement.textContent = errorMessage;
+                    errorElement.classList.add('show');
+                    field.style.borderColor = '#e53e3e';
+                }
+            }
+
+            return isValid;
+        }
+
+        // Validation des groupes de radio buttons
+        function validateRadioGroup(groupName) {
+            const radios = document.querySelectorAll(`input[name="${groupName}"]`);
+            const errorElement = document.getElementById(`error-${groupName}`);
+            const isChecked = Array.from(radios).some(radio => radio.checked);
+
+            if (errorElement) {
+                if (isChecked || !radios[0].hasAttribute('required')) {
+                    errorElement.textContent = '';
+                    errorElement.classList.remove('show');
+                } else {
+                    errorElement.textContent = 'Veuillez sélectionner une option';
+                    errorElement.classList.add('show');
+                }
+            }
+
+            return isChecked || !radios[0].hasAttribute('required');
+        }
+
+        // Ajouter les événements de validation
+        const inputs = document.querySelectorAll('input, textarea, select');
+        inputs.forEach(input => {
+            input.addEventListener('blur', () => validateField(input));
+            input.addEventListener('input', () => {
+                if (input.style.borderColor === 'rgb(229, 62, 62)') {
+                    validateField(input);
+                }
+            });
+        });
+
+        const radioGroups = ['consultation-type', 'language'];
+        radioGroups.forEach(groupName => {
+            const radios = document.querySelectorAll(`input[name="${groupName}"]`);
+            radios.forEach(radio => {
+                radio.addEventListener('change', () => validateRadioGroup(groupName));
+            });
+        });
+
+        // Gestion de la soumission du formulaire
+        form.addEventListener('submit', function(e) {
+            // Validation des champs requis seulement
+            let isFormValid = true;
+            let invalidFields = [];
+            
+            // Vérifier uniquement les champs requis
+            const requiredInputs = document.querySelectorAll('input[required], textarea[required]');
+            requiredInputs.forEach(input => {
+                if (input.type !== 'radio' && input.value.trim() === '') {
+                    isFormValid = false;
+                    invalidFields.push(input.name || input.id);
+                }
+            });
+
+            // Vérifier les groupes radio requis
+            radioGroups.forEach(groupName => {
+                const checked = document.querySelector(`input[name="${groupName}"]:checked`);
+                if (!checked) {
+                    isFormValid = false;
+                    invalidFields.push(groupName);
+                }
+            });
+
+            // Si des champs requis sont vides, empêcher la soumission
+            if (!isFormValid) {
+                e.preventDefault();
+                console.log('Champs invalides:', invalidFields); // Debug
+                
+                // Scroll vers le premier champ avec erreur
+                const firstError = document.querySelector('.error-message.show');
+                if (firstError) {
+                    firstError.closest('.form-group').scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+                return false;
+            }
+
+            // Formulaire valide - montrer l'animation et permettre la soumission
+            submitBtn.classList.add('loading');
+            submitText.style.opacity = '0';
+            
+            // Nettoyer le localStorage avant soumission
+            localStorage.removeItem('ifa_consultation_draft');
+            
+            console.log('Formulaire soumis avec succès'); // Debug
+            // Laisser le navigateur soumettre le formulaire normalement
+        });
+
+        // Animation d'entrée des éléments
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        document.querySelectorAll('.form-group').forEach(group => {
+            observer.observe(group);
+        });
+
+        // ==================== FONCTIONNALITÉS SMART ====================
+
+        // 1. Liste des pays pour l'auto-complétion
+        const countries = [
+            'Afghanistan', 'Afrique du Sud', 'Albanie', 'Algérie', 'Allemagne', 'Andorre', 'Angola', 'Antigua-et-Barbuda',
+            'Arabie saoudite', 'Argentine', 'Arménie', 'Australie', 'Autriche', 'Azerbaïdjan', 'Bahamas', 'Bahreïn',
+            'Bangladesh', 'Barbade', 'Belgique', 'Belize', 'Bénin', 'Bhoutan', 'Biélorussie', 'Birmanie', 'Bolivie',
+            'Bosnie-Herzégovine', 'Botswana', 'Brésil', 'Brunei', 'Bulgarie', 'Burkina Faso', 'Burundi', 'Cambodge',
+            'Cameroun', 'Canada', 'Cap-Vert', 'Chili', 'Chine', 'Chypre', 'Colombie', 'Comores', 'Congo', 'République démocratique du Congo',
+            'Corée du Nord', 'Corée du Sud', 'Costa Rica', 'Côte d\'Ivoire', 'Croatie', 'Cuba', 'Danemark', 'Djibouti',
+            'Dominique', 'Égypte', 'Émirats arabes unis', 'Équateur', 'Érythrée', 'Espagne', 'Estonie', 'États-Unis',
+            'Éthiopie', 'Fidji', 'Finlande', 'France', 'Gabon', 'Gambie', 'Géorgie', 'Ghana', 'Grèce', 'Grenade',
+            'Guatemala', 'Guinée', 'Guinée-Bissau', 'Guinée équatoriale', 'Guyana', 'Haïti', 'Honduras', 'Hongrie',
+            'Îles Cook', 'Îles Marshall', 'Inde', 'Indonésie', 'Irak', 'Iran', 'Irlande', 'Islande', 'Israël', 'Italie',
+            'Jamaïque', 'Japon', 'Jordanie', 'Kazakhstan', 'Kenya', 'Kirghizistan', 'Kiribati', 'Koweït', 'Laos',
+            'Lesotho', 'Lettonie', 'Liban', 'Libéria', 'Libye', 'Liechtenstein', 'Lituanie', 'Luxembourg', 'Macédoine du Nord',
+            'Madagascar', 'Malaisie', 'Malawi', 'Maldives', 'Mali', 'Malte', 'Maroc', 'Maurice', 'Mauritanie', 'Mexique',
+            'Micronésie', 'Moldavie', 'Monaco', 'Mongolie', 'Monténégro', 'Mozambique', 'Namibie', 'Nauru', 'Népal',
+            'Nicaragua', 'Niger', 'Nigéria', 'Norvège', 'Nouvelle-Zélande', 'Oman', 'Ouganda', 'Ouzbékistan', 'Pakistan',
+            'Palaos', 'Palestine', 'Panama', 'Papouasie-Nouvelle-Guinée', 'Paraguay', 'Pays-Bas', 'Pérou', 'Philippines',
+            'Pologne', 'Portugal', 'Qatar', 'République centrafricaine', 'République dominicaine', 'République tchèque',
+            'Roumanie', 'Royaume-Uni', 'Russie', 'Rwanda', 'Saint-Christophe-et-Niévès', 'Sainte-Lucie', 'Saint-Marin',
+            'Saint-Vincent-et-les-Grenadines', 'Salomon', 'Salvador', 'Samoa', 'São Tomé-et-Principe', 'Sénégal',
+            'Serbie', 'Seychelles', 'Sierra Leone', 'Singapour', 'Slovaquie', 'Slovénie', 'Somalie', 'Soudan',
+            'Soudan du Sud', 'Sri Lanka', 'Suède', 'Suisse', 'Suriname', 'Syrie', 'Tadjikistan', 'Tanzanie', 'Tchad',
+            'Thaïlande', 'Timor oriental', 'Togo', 'Tonga', 'Trinité-et-Tobago', 'Tunisie', 'Turkménistan', 'Turquie',
+            'Tuvalu', 'Ukraine', 'Uruguay', 'Vanuatu', 'Vatican', 'Venezuela', 'Viêt Nam', 'Yémen', 'Zambie', 'Zimbabwe'
+        ];
+
+        // 2. Auto-complétion intelligente des pays
+        const countryInput = document.getElementById('country');
+        const countrySuggestions = document.getElementById('country-suggestions');
+        let selectedSuggestionIndex = -1;
+
+        function showCountrySuggestions(suggestions) {
+            countrySuggestions.innerHTML = '';
+            if (suggestions.length > 0) {
+                countrySuggestions.style.display = 'block';
+                suggestions.forEach((country, index) => {
+                    const suggestion = document.createElement('div');
+                    suggestion.className = 'country-suggestion';
+                    suggestion.textContent = country;
+                    suggestion.addEventListener('click', () => {
+                        countryInput.value = country;
+                        countrySuggestions.style.display = 'none';
+                        validateField(countryInput);
+                        updateProgress();
+                    });
+                    countrySuggestions.appendChild(suggestion);
+                });
+            } else {
+                countrySuggestions.style.display = 'none';
+            }
+        }
+
+        countryInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            if (query.length > 0) {
+                const matches = countries.filter(country => 
+                    country.toLowerCase().includes(query)
+                ).slice(0, 6);
+                showCountrySuggestions(matches);
+                selectedSuggestionIndex = -1;
+            } else {
+                countrySuggestions.style.display = 'none';
+            }
+        });
+
+        countryInput.addEventListener('keydown', function(e) {
+            const suggestions = countrySuggestions.querySelectorAll('.country-suggestion');
+            if (suggestions.length === 0) return;
+
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                selectedSuggestionIndex = (selectedSuggestionIndex + 1) % suggestions.length;
+                updateSuggestionSelection(suggestions);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                selectedSuggestionIndex = selectedSuggestionIndex <= 0 
+                    ? suggestions.length - 1 
+                    : selectedSuggestionIndex - 1;
+                updateSuggestionSelection(suggestions);
+            } else if (e.key === 'Enter' && selectedSuggestionIndex >= 0) {
+                e.preventDefault();
+                suggestions[selectedSuggestionIndex].click();
+            } else if (e.key === 'Escape') {
+                countrySuggestions.style.display = 'none';
+                selectedSuggestionIndex = -1;
+            }
+        });
+
+        function updateSuggestionSelection(suggestions) {
+            suggestions.forEach((suggestion, index) => {
+                suggestion.classList.toggle('selected', index === selectedSuggestionIndex);
+            });
+        }
+
+        // Fermer suggestions au clic extérieur
+        document.addEventListener('click', function(e) {
+            if (!countryInput.contains(e.target) && !countrySuggestions.contains(e.target)) {
+                countrySuggestions.style.display = 'none';
+            }
+        });
+
+        // 3. Préremplissage intelligent selon l'IP (approximatif via timezone)
+        function guessCountryFromTimezone() {
+            try {
+                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                const countryMappings = {
+                    'Europe/Paris': 'France',
+                    'Europe/London': 'Royaume-Uni',
+                    'America/New_York': 'États-Unis',
+                    'America/Los_Angeles': 'États-Unis',
+                    'Europe/Berlin': 'Allemagne',
+                    'Europe/Rome': 'Italie',
+                    'Europe/Madrid': 'Espagne',
+                    'Africa/Cairo': 'Égypte',
+                    'Africa/Lagos': 'Nigéria',
+                    'Africa/Johannesburg': 'Afrique du Sud',
+                    'Asia/Tokyo': 'Japon',
+                    'Asia/Shanghai': 'Chine',
+                    'America/Sao_Paulo': 'Brésil',
+                    'Europe/Brussels': 'Belgique',
+                    'Africa/Casablanca': 'Maroc',
+                    'Africa/Algiers': 'Algérie',
+                    'Africa/Tunis': 'Tunisie'
+                };
+                return countryMappings[timezone] || '';
+            } catch (e) {
+                return '';
+            }
+        }
+
+        // Préremplir le pays si vide
+        window.addEventListener('load', function() {
+            if (!countryInput.value) {
+                const guessedCountry = guessCountryFromTimezone();
+                if (guessedCountry) {
+                    countryInput.value = guessedCountry;
+                    validateField(countryInput);
+                }
+            }
+        });
+
+        // 4. Validation en temps réel avancée
+        function validateField(field) {
+            const formGroup = field.closest('.form-group');
+            let isValid = true;
+            let errorMessage = '';
+
+            // Supprimer les anciens icônes
+            const existingIcon = formGroup.querySelector('.validation-icon');
+            if (existingIcon) existingIcon.remove();
+
+            switch(field.id) {
+                case 'fullname':
+                    const fullNameTrimmed = field.value.trim();
+                    const nameWords = fullNameTrimmed.split(' ').filter(word => word.length > 0);
+                    // Accepter au moins 2 mots, ou 1 mot s'il fait plus de 3 caractères
+                    isValid = (nameWords.length >= 2) || (nameWords.length === 1 && fullNameTrimmed.length > 3);
+                    errorMessage = nameWords.length < 1 ? 'Nom requis' : 'Prénom et nom recommandés';
+                    break;
+                case 'birthdate':
+                    const date = new Date(field.value);
+                    const today = new Date();
+                    const hundredYearsAgo = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());
+                    isValid = date && date <= today && date >= hundredYearsAgo;
+                    errorMessage = 'Date invalide ou future';
+                    break;
+                case 'birthplace':
+                    isValid = field.value.trim().length >= 2;
+                    errorMessage = 'Lieu trop court';
+                    break;
+                case 'country':
+                    isValid = countries.includes(field.value) || field.value.trim().length >= 2;
+                    errorMessage = 'Pays invalide';
+                    break;
+                case 'mother-name':
+                    const motherNameTrimmed = field.value.trim();
+                    // Accepter soit un nom complet (2+ mots) soit un nom simple (1 mot de 2+ caractères)
+                    const words = motherNameTrimmed.split(' ').filter(word => word.length > 0);
+                    isValid = words.length >= 1 && motherNameTrimmed.length >= 2;
+                    errorMessage = 'Nom trop court';
+                    break;
+            }
+
+            // Ajouter classe et icône de validation
+            if (field.value.trim() !== '') {
+                const icon = document.createElement('i');
+                icon.className = `fas validation-icon ${isValid ? 'fa-check valid' : 'fa-times invalid'}`;
+                
+                // Positionner l'icône dans le form-group
+                const inputContainer = field.parentElement;
+                inputContainer.style.position = 'relative';
+                inputContainer.appendChild(icon);
+                
+                formGroup.classList.toggle('valid', isValid);
+                formGroup.classList.toggle('invalid', !isValid);
+            } else {
+                formGroup.classList.remove('valid', 'invalid');
+            }
+
+            return isValid;
+        }
+
+        // 5. Prévisualisation de photo avec suppression
+        const photoInput = document.getElementById('photo');
+        const photoPreview = document.getElementById('photo-preview');
+        const previewImage = document.getElementById('preview-image');
+
+        photoInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('Le fichier est trop volumineux (max 5MB)');
+                    this.value = '';
+                    return;
+                }
+                
+                if (!file.type.startsWith('image/')) {
+                    alert('Veuillez sélectionner une image');
+                    this.value = '';
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    photoPreview.style.display = 'inline-block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        window.removePhoto = function() {
+            photoInput.value = '';
+            photoPreview.style.display = 'none';
+            previewImage.src = '';
+        };
+
+        // 6. Compteur de caractères intelligent
+        const detailsTextarea = document.getElementById('details');
+        const charCount = document.getElementById('char-count');
+        const charCounter = document.querySelector('.char-counter');
+
+        detailsTextarea.addEventListener('input', function() {
+            const length = this.value.length;
+            charCount.textContent = length;
+            
+            charCounter.classList.remove('warning', 'danger');
+            if (length > 800) {
+                charCounter.classList.add('danger');
+            } else if (length > 600) {
+                charCounter.classList.add('warning');
+            }
+        });
+
+        // 7. Barre de progression intelligente
+        function updateProgress() {
+            const requiredFields = document.querySelectorAll('input[required], textarea[required]');
+            const radioGroups = ['consultation-type', 'language'];
+            
+            let filledCount = 0;
+            let totalCount = 0;
+            
+            requiredFields.forEach(field => {
+                if (field.type !== 'radio') {
+                    totalCount++;
+                    if (field.value.trim()) {
+                        filledCount++;
+                    }
+                }
+            });
+            
+            // Compter les groupes radio
+            radioGroups.forEach(groupName => {
+                totalCount++;
+                const checked = document.querySelector(`input[name="${groupName}"]:checked`);
+                if (checked) filledCount++;
+            });
+
+            const percentage = Math.round((filledCount / totalCount) * 100);
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            
+            progressBar.style.width = percentage + '%';
+            progressText.textContent = percentage + '% complété';
+            
+            // Changer la couleur selon le progrès
+            if (percentage >= 100) {
+                progressBar.style.background = 'linear-gradient(90deg, #27ae60, #2ecc71)';
+            } else if (percentage >= 70) {
+                progressBar.style.background = 'linear-gradient(90deg, #f39c12, #e67e22)';
+            } else {
+                progressBar.style.background = 'linear-gradient(90deg, #667eea, #764ba2)';
+            }
+        }
+
+        // 8. Sauvegarde automatique locale
+        let saveTimeout;
+        function autoSave() {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => {
+                const formData = new FormData(document.getElementById('consultation-form'));
+                const data = {};
+                
+                for (let [key, value] of formData.entries()) {
+                    if (key !== 'photo') { // Ne pas sauvegarder les fichiers
+                        data[key] = value;
+                    }
+                }
+                
+                localStorage.setItem('ifa_consultation_draft', JSON.stringify(data));
+                showAutoSaveIndicator();
+            }, 2000);
+        }
+
+        function showAutoSaveIndicator() {
+            const indicator = document.getElementById('auto-save-indicator');
+            indicator.style.display = 'block';
+            setTimeout(() => {
+                indicator.style.display = 'none';
+            }, 2000);
+        }
+
+        function loadDraft() {
+            const draft = localStorage.getItem('ifa_consultation_draft');
+            if (draft) {
+                try {
+                    const data = JSON.parse(draft);
+                    Object.keys(data).forEach(key => {
+                        const field = document.querySelector(`[name="${key}"]`);
+                        if (field) {
+                            if (field.type === 'radio') {
+                                const radioField = document.querySelector(`[name="${key}"][value="${data[key]}"]`);
+                                if (radioField) radioField.checked = true;
+                            } else {
+                                field.value = data[key];
+                            }
+                        }
+                    });
+                } catch (e) {
+                    console.error('Erreur lors du chargement du brouillon:', e);
+                }
+            }
+        }
+
+        // 9. Questions conditionnelles avancées
+        function updateConditionalFields() {
+            const specificType = document.querySelector('input[name="consultation-type"]:checked');
+            const specificRequestGroup = document.getElementById('specific-request-group');
+            
+            if (specificType && specificType.value === 'Demande spécifique') {
+                specificRequestGroup.style.display = 'block';
+                // Rendre les champs spécifiques requis
+                const specificInputs = specificRequestGroup.querySelectorAll('input[type="radio"]');
+                specificInputs.forEach(input => {
+                    input.setAttribute('required', 'required');
+                });
+            } else {
+                specificRequestGroup.style.display = 'none';
+                // Supprimer l'exigence
+                const specificInputs = specificRequestGroup.querySelectorAll('input[type="radio"]');
+                specificInputs.forEach(input => {
+                    input.removeAttribute('required');
+                    input.checked = false;
+                });
+                document.getElementById('other-request-group').style.display = 'none';
+            }
+        }
+
+        // 10. Attacher tous les événements
+        document.querySelectorAll('input, textarea, select').forEach(field => {
+            field.addEventListener('input', function() {
+                validateField(this);
+                updateProgress();
+                autoSave();
+            });
+            
+            field.addEventListener('change', function() {
+                validateField(this);
+                updateProgress();
+                autoSave();
+                
+                if (this.name === 'consultation-type') {
+                    updateConditionalFields();
+                }
+            });
+        });
+
+        // Définir l'URL de redirection dynamiquement
+        function setRedirectUrl() {
+            const redirectInput = document.getElementById('redirect-url');
+            const currentOrigin = window.location.origin;
+            const fullRedirectUrl = currentOrigin + '/merci.html';
+            redirectInput.value = fullRedirectUrl;
+        }
+
+        // Charger le brouillon au démarrage
+        window.addEventListener('load', function() {
+            setRedirectUrl();
+            loadDraft();
+            updateProgress();
+            updateConditionalFields();
+            
+            // Le nettoyage du localStorage est maintenant fait dans l'événement principal de soumission
+        });
+    </script>
+</body>
+</html>

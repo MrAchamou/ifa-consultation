@@ -807,12 +807,46 @@
             <p class="subtitle" id="subtitle">Découvrez votre destinée à travers la sagesse ancestrale yoruba</p>
         </div>
         
-<form id="consultation-form" action="https://formsubmit.co/terredesmysteres@gmail.com" method="POST" enctype="multipart/form-data">
-    <input type="hidden" name="_next" id="redirect-url" value="https://mrachamou.github.io/ifa-consultation/merci.html">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_subject" value="Nouvelle demande de consultation Ifá">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_autoresponse" value="Merci pour votre demande, elle a bien été reçue.">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Consultation Ifá</title>
+</head>
+<body>
+    <h1>Formulaire de Consultation Ifá</h1>
+
+    <form action="https://formspree.io/f/xblkdryj" method="POST">
+        <!-- Redirection après envoi -->
+        <input type="hidden" name="_redirect" value="https://mrachamou.github.io/ifa-consultation/merci.html">
+
+        <!-- Sujet de l'e-mail -->
+        <input type="hidden" name="_subject" value="Nouvelle demande de consultation Ifá">
+
+        <!-- Champs personnalisés -->
+        <label>
+            Votre nom :
+            <input type="text" name="nom" required>
+        </label>
+        <br><br>
+
+        <label>
+            Votre email :
+            <input type="email" name="email" required>
+        </label>
+        <br><br>
+
+        <label>
+            Message :
+            <textarea name="message" required></textarea>
+        </label>
+        <br><br>
+
+        <button type="submit">Envoyer</button>
+    </form>
+</body>
+</html>
+
             
             <div class="form-group">
                 <label for="fullname" id="label-fullname">
